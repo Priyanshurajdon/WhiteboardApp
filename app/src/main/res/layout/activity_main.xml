@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1A1A2E">
+
+    <!-- Top Toolbar -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/topToolbar"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:background="#16213E"
+        android:elevation="4dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Import PPT Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnImportPpt"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:text="Import PPT"
+            android:textSize="12sp"
+            android:textColor="#FFFFFF"
+            app:backgroundTint="#0F3460"
+            app:cornerRadius="8dp"
+            app:icon="@android:drawable/ic_menu_upload"
+            app:iconTint="#E94560"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="8dp"/>
+
+        <!-- Prev Slide Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnPrevSlide"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:text=""
+            app:backgroundTint="#0F3460"
+            app:cornerRadius="8dp"
+            app:icon="@android:drawable/ic_media_previous"
+            app:iconTint="#FFFFFF"
+            app:iconPadding="0dp"
+            app:iconSize="20dp"
+            android:enabled="false"
+            app:layout_constraintStart_toEndOf="@id/btnImportPpt"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="8dp"/>
+
+        <!-- Slide Counter -->
+        <TextView
+            android:id="@+id/tvSlideCounter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No Slides"
+            android:textColor="#A8B2D8"
+            android:textSize="13sp"
+            android:fontFamily="monospace"
+            app:layout_constraintStart_toEndOf="@id/btnPrevSlide"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="10dp"/>
+
+        <!-- Next Slide Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnNextSlide"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:text=""
+            app:backgroundTint="#0F3460"
+            app:cornerRadius="8dp"
+            app:icon="@android:drawable/ic_media_next"
+            app:iconTint="#FFFFFF"
+            app:iconPadding="0dp"
+            app:iconSize="20dp"
+            android:enabled="false"
+            app:layout_constraintStart_toEndOf="@id/tvSlideCounter"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="10dp"/>
+
+        <!-- Export PPT Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnExportPpt"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:text="Export PPT"
+            android:textSize="12sp"
+            android:textColor="#FFFFFF"
+            app:backgroundTint="#E94560"
+            app:cornerRadius="8dp"
+            app:icon="@android:drawable/ic_menu_save"
+            app:iconTint="#FFFFFF"
+            android:enabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="8dp"/>
+
+        <!-- Clear Drawing Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnClearDrawing"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:text="Clear"
+            android:textSize="12sp"
+            android:textColor="#FFFFFF"
+            app:backgroundTint="#533483"
+            app:cornerRadius="8dp"
+            app:icon="@android:drawable/ic_menu_delete"
+            app:iconTint="#FFFFFF"
+            app:layout_constraintEnd_toStartOf="@id/btnExportPpt"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="8dp"/>
+
+        <!-- Undo Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnUndo"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:text=""
+            app:backgroundTint="#0F3460"
+            app:cornerRadius="8dp"
+            app:icon="@android:drawable/ic_menu_revert"
+            app:iconTint="#FFFFFF"
+            app:iconPadding="0dp"
+            app:iconSize="20dp"
+            app:layout_constraintEnd_toStartOf="@id/btnClearDrawing"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="8dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Drawing Toolbar (Left Side) -->
+    <LinearLayout
+        android:id="@+id/drawingToolbar"
+        android:layout_width="52dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:background="#16213E"
+        android:elevation="4dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintTop_toBottomOf="@id/topToolbar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <!-- Pen Tool -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnPen"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="4dp"
+            android:text=""
+            app:backgroundTint="#E94560"
+            app:cornerRadius="8dp"
+            app:icon="@drawable/ic_pen"
+            app:iconTint="#FFFFFF"
+            app:iconPadding="0dp"
+            app:iconSize="20dp"/>
+
+        <!-- Highlighter Tool -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnHighlighter"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="4dp"
+            android:text=""
+            app:backgroundTint="#0F3460"
+            app:cornerRadius="8dp"
+            app:icon="@drawable/ic_highlight"
+            app:iconTint="#FFFFFF"
+            app:iconPadding="0dp"
+            app:iconSize="20dp"/>
+
+        <!-- Eraser Tool -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnEraser"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="4dp"
+            android:text=""
+            app:backgroundTint="#0F3460"
+            app:cornerRadius="8dp"
+            app:icon="@drawable/ic_eraser"
+            app:iconTint="#FFFFFF"
+            app:iconPadding="0dp"
+            app:iconSize="20dp"/>
+
+        <!-- Line Tool -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnLine"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="4dp"
+            android:text=""
+            app:backgroundTint="#0F3460"
+            app:cornerRadius="8dp"
+            app:icon="@drawable/ic_line"
+            app:iconTint="#FFFFFF"
+            app:iconPadding="0dp"
+            app:iconSize="20dp"/>
+
+        <!-- Rectangle Tool -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnRect"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="4dp"
+            android:text=""
+            app:backgroundTint="#0F3460"
+            app:cornerRadius="8dp"
+            app:icon="@drawable/ic_rect"
+            app:iconTint="#FFFFFF"
+            app:iconPadding="0dp"
+            app:iconSize="20dp"/>
+
+        <!-- Circle Tool -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCircle"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="12dp"
+            android:text=""
+            app:backgroundTint="#0F3460"
+            app:cornerRadius="8dp"
+            app:icon="@drawable/ic_circle"
+            app:iconTint="#FFFFFF"
+            app:iconPadding="0dp"
+            app:iconSize="20dp"/>
+
+        <!-- Divider -->
+        <View
+            android:layout_width="32dp"
+            android:layout_height="1dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="12dp"
+            android:background="#2D3561"/>
+
+        <!-- Stroke Size Small -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSizeSmall"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="4dp"
+            android:text="S"
+            android:textSize="11sp"
+            android:textColor="#FFFFFF"
+            app:backgroundTint="#0F3460"
+            app:cornerRadius="8dp"/>
+
+        <!-- Stroke Size Medium -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSizeMedium"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="4dp"
+            android:text="M"
+            android:textSize="11sp"
+            android:textColor="#FFFFFF"
+            app:backgroundTint="#E94560"
+            app:cornerRadius="8dp"/>
+
+        <!-- Stroke Size Large -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSizeLarge"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="12dp"
+            android:text="L"
+            android:textSize="11sp"
+            android:textColor="#FFFFFF"
+            app:backgroundTint="#0F3460"
+            app:cornerRadius="8dp"/>
+
+        <!-- Color Picker Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnColorPicker"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:text=""
+            app:backgroundTint="#E94560"
+            app:cornerRadius="20dp"
+            app:icon="@android:drawable/ic_menu_manage"
+            app:iconTint="#FFFFFF"
+            app:iconPadding="0dp"
+            app:iconSize="18dp"/>
+
+    </LinearLayout>
+
+    <!-- Main Canvas Area -->
+    <FrameLayout
+        android:id="@+id/canvasContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#F5F5F0"
+        app:layout_constraintTop_toBottomOf="@id/topToolbar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/drawingToolbar"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Slide Image View -->
+        <ImageView
+            android:id="@+id/slideImageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"
+            android:contentDescription="Slide Content"/>
+
+        <!-- Drawing Canvas (overlay) -->
+        <com.whiteboard.app.DrawingView
+            android:id="@+id/drawingView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <!-- Empty State -->
+        <LinearLayout
+            android:id="@+id/emptyState"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="📊"
+                android:textSize="64sp"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Import a PowerPoint to begin"
+                android:textColor="#999999"
+                android:textSize="18sp"
+                android:fontFamily="sans-serif-light"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Or draw freely on this canvas"
+                android:textColor="#BBBBBB"
+                android:textSize="14sp"
+                android:layout_marginTop="8dp"/>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <!-- Color Palette Popup (hidden by default) -->
+    <LinearLayout
+        android:id="@+id/colorPalette"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#16213E"
+        android:padding="8dp"
+        android:elevation="8dp"
+        android:visibility="gone"
+        app:layout_constraintStart_toEndOf="@id/drawingToolbar"
+        app:layout_constraintTop_toBottomOf="@id/topToolbar"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp">
+
+        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <View android:id="@+id/colorRed" android:layout_width="32dp" android:layout_height="32dp"
+                android:background="#E94560" android:layout_margin="3dp"/>
+            <View android:id="@+id/colorBlue" android:layout_width="32dp" android:layout_height="32dp"
+                android:background="#0F3460" android:layout_margin="3dp"/>
+            <View android:id="@+id/colorGreen" android:layout_width="32dp" android:layout_height="32dp"
+                android:background="#00B4D8" android:layout_margin="3dp"/>
+            <View android:id="@+id/colorYellow" android:layout_width="32dp" android:layout_height="32dp"
+                android:background="#FFD700" android:layout_margin="3dp"/>
+        </LinearLayout>
+        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <View android:id="@+id/colorOrange" android:layout_width="32dp" android:layout_height="32dp"
+                android:background="#FF6B35" android:layout_margin="3dp"/>
+            <View android:id="@+id/colorPurple" android:layout_width="32dp" android:layout_height="32dp"
+                android:background="#7B2FBE" android:layout_margin="3dp"/>
+            <View android:id="@+id/colorWhite" android:layout_width="32dp" android:layout_height="32dp"
+                android:background="#FFFFFF" android:layout_margin="3dp"/>
+            <View android:id="@+id/colorBlack" android:layout_width="32dp" android:layout_height="32dp"
+                android:background="#000000" android:layout_margin="3dp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
